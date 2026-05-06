@@ -40,3 +40,29 @@ public class GameController {
         // and update model + view
     }
 }
+// When Addition button is clicked
+view.getAdditionButton().addActionListener(e -> {
+    model.generateAdditionQuestion();
+
+    String question = model.getNum1() + " + " + model.getNum2();
+    view.setQuestionText(question);
+
+    view.showAdditionScreen();
+});
+view.getAnswerField().addActionListener(e -> {
+    try {
+        int userAnswer = Integer.parseInt(view.getUserAnswer());
+
+        boolean correct = model.checkAnswer(userAnswer);
+
+        // Generate next question immediately
+        model.generateAdditionQuestion();
+        String newQuestion = model.getNum1() + " + " + model.getNum2();
+        view.setQuestionText(newQuestion);
+
+        view.clearAnswerField();
+
+    } catch (NumberFormatException ex) {
+        view.clearAnswerField(); // invalid input
+    }
+});
