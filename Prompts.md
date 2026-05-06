@@ -12,3 +12,6 @@ I am now having the following issues appear, can you explain what these mean and
 Syntax error on token "getAdditionButton", Identifier expected after this token
 Syntax error on token ".", { expected
 Syntax error, insert "}" to complete MethodBody
+
+now make it in the Game View, that when you get the answer correct, it says "Correct!" and shows you something that says "Total Answers Right: ", "Correct Answer Streak: ", "Total Wrong Answers", then regardless of wrong or write, asks if you want to go to the next question, which creates the next question, or goes back to the home screen.
+

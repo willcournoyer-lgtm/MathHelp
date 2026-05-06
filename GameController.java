@@ -9,41 +9,67 @@ public class GameController {
         model = new GameModel();
         view = new GameView();
 
-        JFrame frame = new JFrame("Math Game");
+        JFrame frame = new JFrame("Math Tutor");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(400, 300);
+        frame.setSize(500, 400);
         frame.add(view);
         frame.setVisible(true);
 
-        // ✅ ✅ ALL EVENT CODE GOES INSIDE HERE ✅ ✅
-
+        // ========================
+        // MENU -> ADDITION
+        // ========================
         view.getAdditionButton().addActionListener(e -> {
             model.generateAdditionQuestion();
 
             String question = model.getNum1() + " + " + model.getNum2();
             view.setQuestionText(question);
 
+            view.clearAnswerField();
             view.showAdditionScreen();
         });
 
+        // ========================
+        // SUBMIT ANSWER
+        // ========================
         view.getAnswerField().addActionListener(e -> {
             try {
                 int userAnswer = Integer.parseInt(view.getUserAnswer());
 
                 boolean correct = model.checkAnswer(userAnswer);
 
-                model.generateAdditionQuestion();
-                String newQuestion = model.getNum1() + " + " + model.getNum2();
-                view.setQuestionText(newQuestion);
+                view.setResultText(correct);
+                view.setStatsText(
+                        model.getTotalCorrect(),
+                        model.getCorrectInRow(),
+                        model.getTotalWrong()
+                );
 
-                view.clearAnswerField();
+                view.showResultScreen();
 
             } catch (NumberFormatException ex) {
                 view.clearAnswerField();
             }
         });
 
-        // ✅ ✅ END OF CONSTRUCTOR ✅ ✅
+        // ========================
+        // NEXT QUESTION
+        // ========================
+        view.getNextButton().addActionListener(e -> {
+            model.generateAdditionQuestion();
+
+            String question = model.getNum1() + " + " + model.getNum2();
+            view.setQuestionText(question);
+
+            view.clearAnswerField();
+            view.showAdditionScreen();
+        });
+
+        // ========================
+        // BACK TO MENU
+        // ========================
+        view.getHomeButton().addActionListener(e -> {
+            view.showMenu();
+        });
     }
 
     public static void main(String[] args) {
