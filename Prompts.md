@@ -6,3 +6,9 @@ Now, in the game model, add a section of information called "Addition". in this 
 
 now, i want you to update the Game View so that it has a black background with green text. Green text should say at the top "Welcome to your Math Tutor! What can I help you with?" Then under that, have five boxes, each one saying the following; "Addition", "Subtraction", "Multiplication", "Division", "Exponents". 
 
+now make it so that when you click on the addition button, it brings you to a new screen that produces the equation used in the generateAdditionQuestion. it should also give you a small box that can be clicked on where the user can type in the answer.
+
+I am now having the following issues appear, can you explain what these mean and give solutions?
+Syntax error on token "getAdditionButton", Identifier expected after this token
+Syntax error on token ".", { expected
+Syntax error, insert "}" to complete MethodBody

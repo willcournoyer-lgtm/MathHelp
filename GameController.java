@@ -1,68 +1,52 @@
 import javax.swing.JFrame;
 
-// The controller connects the model and view,
-// handles user input, and starts the application.
-
 public class GameController {
 
     private GameModel model;
     private GameView view;
 
     public GameController() {
-        // Initialize model and view
         model = new GameModel();
         view = new GameView();
 
-        // Create the main application window
         JFrame frame = new JFrame("Math Game");
-
-        // Set up frame
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(400, 300);
-
-        // Add view to frame
         frame.add(view);
-
-        // Make window visible
         frame.setVisible(true);
+
+        // ✅ ✅ ALL EVENT CODE GOES INSIDE HERE ✅ ✅
+
+        view.getAdditionButton().addActionListener(e -> {
+            model.generateAdditionQuestion();
+
+            String question = model.getNum1() + " + " + model.getNum2();
+            view.setQuestionText(question);
+
+            view.showAdditionScreen();
+        });
+
+        view.getAnswerField().addActionListener(e -> {
+            try {
+                int userAnswer = Integer.parseInt(view.getUserAnswer());
+
+                boolean correct = model.checkAnswer(userAnswer);
+
+                model.generateAdditionQuestion();
+                String newQuestion = model.getNum1() + " + " + model.getNum2();
+                view.setQuestionText(newQuestion);
+
+                view.clearAnswerField();
+
+            } catch (NumberFormatException ex) {
+                view.clearAnswerField();
+            }
+        });
+
+        // ✅ ✅ END OF CONSTRUCTOR ✅ ✅
     }
 
     public static void main(String[] args) {
-        // Start the game
         new GameController();
     }
-
-    // Placeholder for control logic
-
-    // Connect user actions to model updates
-    public void handleUserInput() {
-        // TODO: Listen for button clicks / input
-        // and update model + view
-    }
 }
-// When Addition button is clicked
-view.getAdditionButton().addActionListener(e -> {
-    model.generateAdditionQuestion();
-
-    String question = model.getNum1() + " + " + model.getNum2();
-    view.setQuestionText(question);
-
-    view.showAdditionScreen();
-});
-view.getAnswerField().addActionListener(e -> {
-    try {
-        int userAnswer = Integer.parseInt(view.getUserAnswer());
-
-        boolean correct = model.checkAnswer(userAnswer);
-
-        // Generate next question immediately
-        model.generateAdditionQuestion();
-        String newQuestion = model.getNum1() + " + " + model.getNum2();
-        view.setQuestionText(newQuestion);
-
-        view.clearAnswerField();
-
-    } catch (NumberFormatException ex) {
-        view.clearAnswerField(); // invalid input
-    }
-});
