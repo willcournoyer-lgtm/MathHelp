@@ -1,69 +1,104 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 // The model handles all game logic and data.
 // IMPORTANT: No Swing imports here.
 
 public class GameModel {
 
-    // Total number of correct answers
+    // ========================
+    // GENERAL TRACKING DATA
+    // ========================
     private int totalCorrect;
-
-    // Number of correct answers in a row (streak)
     private int correctInRow;
-
-    // Total number of wrong answers
     private int totalWrong;
-
-    // Stores all answers selected by the player
     private List<Integer> selectedAnswers;
+
+    private Random random;
+
+    // ========================
+    // ADDITION SECTION
+    // ========================
+    private int num1;
+    private int num2;
+    private int correctAnswer;
 
     public GameModel() {
         totalCorrect = 0;
         correctInRow = 0;
         totalWrong = 0;
         selectedAnswers = new ArrayList<>();
+        random = new Random();
+
+        generateAdditionQuestion();
     }
 
-    // Record a correct answer
-    public void recordCorrectAnswer(int answer) {
-        totalCorrect++;
-        correctInRow++;
-        selectedAnswers.add(answer);
+    // ========================
+    // ADDITION METHODS
+    // ========================
+
+    // Generate a new addition question
+    public void generateAdditionQuestion() {
+        num1 = random.nextInt(999) + 1; // 1–999
+        num2 = random.nextInt(999) + 1; // 1–999
+        correctAnswer = num1 + num2;
     }
 
-    // Record a wrong answer
-    public void recordWrongAnswer(int answer) {
-        totalWrong++;
-        correctInRow = 0; // reset streak
-        selectedAnswers.add(answer);
+    // Get current question numbers
+    public int getNum1() {
+        return num1;
     }
 
-    // Get total correct answers
+    public int getNum2() {
+        return num2;
+    }
+
+    // Check user's answer
+    public boolean checkAnswer(int userAnswer) {
+        selectedAnswers.add(userAnswer);
+
+        if (userAnswer == correctAnswer) {
+            totalCorrect++;
+            correctInRow++;
+            return true;
+        } else {
+            totalWrong++;
+            correctInRow = 0; // reset streak
+            return false;
+        }
+    }
+
+    // ========================
+    // GETTERS FOR STATS
+    // ========================
+
     public int getTotalCorrect() {
         return totalCorrect;
     }
 
-    // Get current correct streak
     public int getCorrectInRow() {
         return correctInRow;
     }
 
-    // Get total wrong answers
     public int getTotalWrong() {
         return totalWrong;
     }
 
-    // Get all selected answers
     public List<Integer> getSelectedAnswers() {
         return selectedAnswers;
     }
 
-    // Reset game stats
+    public int getCorrectAnswer() {
+        return correctAnswer;
+    }
+
+    // Reset game
     public void resetGame() {
         totalCorrect = 0;
         correctInRow = 0;
         totalWrong = 0;
         selectedAnswers.clear();
+        generateAdditionQuestion();
     }
 }
