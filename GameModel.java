@@ -1,36 +1,69 @@
+import java.util.ArrayList;
+import java.util.List;
+
 // The model handles all game logic and data.
 // IMPORTANT: No Swing imports here.
 
 public class GameModel {
 
-    // Example fields (to be expanded later)
-    private int score;
+    // Total number of correct answers
+    private int totalCorrect;
+
+    // Number of correct answers in a row (streak)
+    private int correctInRow;
+
+    // Total number of wrong answers
+    private int totalWrong;
+
+    // Stores all answers selected by the player
+    private List<Integer> selectedAnswers;
 
     public GameModel() {
-        // Initialize game state
-        score = 0;
+        totalCorrect = 0;
+        correctInRow = 0;
+        totalWrong = 0;
+        selectedAnswers = new ArrayList<>();
     }
 
-    // Placeholder methods
-
-    // Generate a math question
-    public void generateQuestion() {
-        // TODO: Create random math problem
+    // Record a correct answer
+    public void recordCorrectAnswer(int answer) {
+        totalCorrect++;
+        correctInRow++;
+        selectedAnswers.add(answer);
     }
 
-    // Check if answer is correct
-    public boolean checkAnswer(int answer) {
-        // TODO: Compare answer to correct value
-        return false;
+    // Record a wrong answer
+    public void recordWrongAnswer(int answer) {
+        totalWrong++;
+        correctInRow = 0; // reset streak
+        selectedAnswers.add(answer);
     }
 
-    // Get current score
-    public int getScore() {
-        return score;
+    // Get total correct answers
+    public int getTotalCorrect() {
+        return totalCorrect;
     }
 
-    // Update score
-    public void incrementScore() {
-        score++;
+    // Get current correct streak
+    public int getCorrectInRow() {
+        return correctInRow;
+    }
+
+    // Get total wrong answers
+    public int getTotalWrong() {
+        return totalWrong;
+    }
+
+    // Get all selected answers
+    public List<Integer> getSelectedAnswers() {
+        return selectedAnswers;
+    }
+
+    // Reset game stats
+    public void resetGame() {
+        totalCorrect = 0;
+        correctInRow = 0;
+        totalWrong = 0;
+        selectedAnswers.clear();
     }
 }
