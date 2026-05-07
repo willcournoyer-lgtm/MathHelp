@@ -2,9 +2,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-// The model handles all game logic and data.
-// IMPORTANT: No Swing imports here.
-
 public class GameModel {
 
     // ========================
@@ -18,11 +15,14 @@ public class GameModel {
     private Random random;
 
     // ========================
-    // ADDITION SECTION
+    // CURRENT QUESTION DATA
     // ========================
     private int num1;
     private int num2;
     private int correctAnswer;
+
+    // Track which mode we're in
+    private String currentMode;
 
     public GameModel() {
         totalCorrect = 0;
@@ -30,22 +30,59 @@ public class GameModel {
         totalWrong = 0;
         selectedAnswers = new ArrayList<>();
         random = new Random();
-
-        generateAdditionQuestion();
     }
 
     // ========================
-    // ADDITION METHODS
+    // ADDITION SECTION
     // ========================
-
-    // Generate a new addition question
     public void generateAdditionQuestion() {
-        num1 = random.nextInt(999) + 1; // 1–999
-        num2 = random.nextInt(999) + 1; // 1–999
+        num1 = random.nextInt(999) + 1;
+        num2 = random.nextInt(999) + 1;
+
         correctAnswer = num1 + num2;
+        currentMode = "ADDITION";
     }
 
-    // Get current question numbers
+    // ========================
+    // SUBTRACTION SECTION
+    // ========================
+    public void generateSubtractionQuestion() {
+        int a = random.nextInt(999) + 1;
+        int b = random.nextInt(999) + 1;
+
+        // Ensure larger number is first
+        if (a >= b) {
+            num1 = a;
+            num2 = b;
+        } else {
+            num1 = b;
+            num2 = a;
+        }
+
+        correctAnswer = num1 - num2;
+        currentMode = "SUBTRACTION";
+    }
+
+    // ========================
+    // CHECK ANSWER
+    // ========================
+    public boolean checkAnswer(int userAnswer) {
+        selectedAnswers.add(userAnswer);
+
+        if (userAnswer == correctAnswer) {
+            totalCorrect++;       // ✅ first
+            correctInRow++;       // ✅ second
+            return true;
+        } else {
+            totalWrong++;
+            correctInRow = 0;
+            return false;
+        }
+    }
+
+    // ========================
+    // GETTERS
+    // ========================
     public int getNum1() {
         return num1;
     }
@@ -53,25 +90,6 @@ public class GameModel {
     public int getNum2() {
         return num2;
     }
-
-    // Check user's answer
-    public boolean checkAnswer(int userAnswer) {
-        selectedAnswers.add(userAnswer);
-
-        if (userAnswer == correctAnswer) {
-            totalCorrect++;
-            correctInRow++;
-            return true;
-        } else {
-            totalWrong++;
-            correctInRow = 0; // reset streak
-            return false;
-        }
-    }
-
-    // ========================
-    // GETTERS FOR STATS
-    // ========================
 
     public int getTotalCorrect() {
         return totalCorrect;
@@ -85,20 +103,7 @@ public class GameModel {
         return totalWrong;
     }
 
-    public List<Integer> getSelectedAnswers() {
-        return selectedAnswers;
-    }
-
-    public int getCorrectAnswer() {
-        return correctAnswer;
-    }
-
-    // Reset game
-    public void resetGame() {
-        totalCorrect = 0;
-        correctInRow = 0;
-        totalWrong = 0;
-        selectedAnswers.clear();
-        generateAdditionQuestion();
+    public String getCurrentMode() {
+        return currentMode;
     }
 }

@@ -16,38 +16,53 @@ public class GameController {
         frame.setVisible(true);
 
         // ========================
-        // MENU -> ADDITION
+        // ADDITION BUTTON
         // ========================
         view.getAdditionButton().addActionListener(e -> {
             model.generateAdditionQuestion();
 
-            String question = model.getNum1() + " + " + model.getNum2();
-            view.setQuestionText(question);
+            view.setQuestionText(
+                model.getNum1() + " + " + model.getNum2()
+            );
 
-            view.clearAnswerField();
-            view.showAdditionScreen();
+            view.clearAnswer();
+            view.showGame();
         });
 
         // ========================
-        // SUBMIT ANSWER
+        // SUBTRACTION BUTTON
+        // ========================
+        view.getSubtractionButton().addActionListener(e -> {
+            model.generateSubtractionQuestion();
+
+            view.setQuestionText(
+                model.getNum1() + " - " + model.getNum2()
+            );
+
+            view.clearAnswer();
+            view.showGame();
+        });
+
+        // ========================
+        // ANSWER SUBMIT
         // ========================
         view.getAnswerField().addActionListener(e -> {
             try {
-                int userAnswer = Integer.parseInt(view.getUserAnswer());
+                int answer = Integer.parseInt(view.getUserAnswer());
 
-                boolean correct = model.checkAnswer(userAnswer);
+                boolean correct = model.checkAnswer(answer);
 
-                view.setResultText(correct);
-                view.setStatsText(
+                view.setResult(correct);
+                view.setStats(
                         model.getTotalCorrect(),
                         model.getCorrectInRow(),
                         model.getTotalWrong()
                 );
 
-                view.showResultScreen();
+                view.showResult();
 
-            } catch (NumberFormatException ex) {
-                view.clearAnswerField();
+            } catch (Exception ex) {
+                view.clearAnswer();
             }
         });
 
@@ -55,17 +70,25 @@ public class GameController {
         // NEXT QUESTION
         // ========================
         view.getNextButton().addActionListener(e -> {
-            model.generateAdditionQuestion();
 
-            String question = model.getNum1() + " + " + model.getNum2();
-            view.setQuestionText(question);
+            if (model.getCurrentMode().equals("ADDITION")) {
+                model.generateAdditionQuestion();
+                view.setQuestionText(
+                    model.getNum1() + " + " + model.getNum2()
+                );
+            } else if (model.getCurrentMode().equals("SUBTRACTION")) {
+                model.generateSubtractionQuestion();
+                view.setQuestionText(
+                    model.getNum1() + " - " + model.getNum2()
+                );
+            }
 
-            view.clearAnswerField();
-            view.showAdditionScreen();
+            view.clearAnswer();
+            view.showGame();
         });
 
         // ========================
-        // BACK TO MENU
+        // HOME BUTTON
         // ========================
         view.getHomeButton().addActionListener(e -> {
             view.showMenu();

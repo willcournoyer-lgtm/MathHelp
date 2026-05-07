@@ -15,3 +15,5 @@ Syntax error, insert "}" to complete MethodBody
 
 now make it in the Game View, that when you get the answer correct, it says "Correct!" and shows you something that says "Total Answers Right: ", "Correct Answer Streak: ", "Total Wrong Answers", then regardless of wrong or write, asks if you want to go to the next question, which creates the next question, or goes back to the home screen.
 
+Now, in the game model, add a section of information called "Subtraction". in this section, for each question, generate a whole number between 1 up to 999, do this for 2 separate numbers, then organize it so that the larger number is on the left side and have them subtracted from each other. make it so that the user can type in a number, if the entered answer is the correct answer, do the following orders of add to total correct, and correct in a row. Then fully rewrite the game files that you adjust so i can copy and past them.
+
