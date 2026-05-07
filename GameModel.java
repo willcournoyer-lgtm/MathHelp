@@ -73,16 +73,27 @@ public class GameModel {
     // DIVISION
     // ========================
     public void generateDivisionQuestion() {
-        int base = random.nextInt(20) + 1;   // 1–20
-        int multiplier = random.nextInt(20) + 1; // 1–20
+        int base = random.nextInt(20) + 1;
+        int multiplier = random.nextInt(20) + 1;
 
         int product = base * multiplier;
 
-        num1 = product;     // numerator
-        num2 = multiplier;  // divisor
+        num1 = product;
+        num2 = multiplier;
 
-        correctAnswer = base; // result of division
+        correctAnswer = base;
         currentMode = "DIVISION";
+    }
+
+    // ========================
+    // EXPONENTS (Squared)
+    // ========================
+    public void generateExponentQuestion() {
+        num1 = random.nextInt(21); // 0–20
+        num2 = 2; // always squared
+
+        correctAnswer = num1 * num1; // square
+        currentMode = "EXPONENT";
     }
 
     // ========================

@@ -13,6 +13,7 @@ public class GameView extends JPanel {
     private JButton subtractionButton;
     private JButton multiplicationButton;
     private JButton divisionButton;
+    private JButton exponentsButton;
 
     private JLabel questionLabel;
     private JTextField answerField;
@@ -58,12 +59,13 @@ public class GameView extends JPanel {
         subtractionButton = createButton("Subtraction");
         multiplicationButton = createButton("Multiplication");
         divisionButton = createButton("Division");
+        exponentsButton = createButton("Exponents");
 
         buttons.add(additionButton);
         buttons.add(subtractionButton);
         buttons.add(multiplicationButton);
         buttons.add(divisionButton);
-        buttons.add(createButton("Exponents"));
+        buttons.add(exponentsButton);
 
         menuPanel.add(buttons);
     }
@@ -136,6 +138,7 @@ public class GameView extends JPanel {
     public JButton getSubtractionButton() { return subtractionButton; }
     public JButton getMultiplicationButton() { return multiplicationButton; }
     public JButton getDivisionButton() { return divisionButton; }
+    public JButton getExponentsButton() { return exponentsButton; }
     public JTextField getAnswerField() { return answerField; }
     public JButton getNextButton() { return nextButton; }
     public JButton getHomeButton() { return homeButton; }

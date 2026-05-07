@@ -39,10 +39,18 @@ public class GameController {
             view.showGame();
         });
 
-        // ✅ DIVISION
+        // DIVISION
         view.getDivisionButton().addActionListener(e -> {
             model.generateDivisionQuestion();
             view.setQuestionText(model.getNum1() + " ÷ " + model.getNum2());
+            view.clearAnswer();
+            view.showGame();
+        });
+
+        // ✅ EXPONENTS
+        view.getExponentsButton().addActionListener(e -> {
+            model.generateExponentQuestion();
+            view.setQuestionText(model.getNum1() + "^2");
             view.clearAnswer();
             view.showGame();
         });
@@ -91,6 +99,11 @@ public class GameController {
                 case "DIVISION":
                     model.generateDivisionQuestion();
                     view.setQuestionText(model.getNum1() + " ÷ " + model.getNum2());
+                    break;
+
+                case "EXPONENT":
+                    model.generateExponentQuestion();
+                    view.setQuestionText(model.getNum1() + "^2");
                     break;
             }
 
