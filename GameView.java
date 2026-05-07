@@ -12,6 +12,7 @@ public class GameView extends JPanel {
     private JButton additionButton;
     private JButton subtractionButton;
     private JButton multiplicationButton;
+    private JButton divisionButton;
 
     private JLabel questionLabel;
     private JTextField answerField;
@@ -56,11 +57,12 @@ public class GameView extends JPanel {
         additionButton = createButton("Addition");
         subtractionButton = createButton("Subtraction");
         multiplicationButton = createButton("Multiplication");
+        divisionButton = createButton("Division");
 
         buttons.add(additionButton);
         buttons.add(subtractionButton);
         buttons.add(multiplicationButton);
-        buttons.add(createButton("Division"));
+        buttons.add(divisionButton);
         buttons.add(createButton("Exponents"));
 
         menuPanel.add(buttons);
@@ -78,7 +80,7 @@ public class GameView extends JPanel {
         answerField.setBackground(Color.BLACK);
         answerField.setForeground(NEON_GREEN);
         answerField.setCaretColor(NEON_GREEN);
-        answerField.setHorizontalAlignment(JTextField.CENTER); // ✅ centered
+        answerField.setHorizontalAlignment(JTextField.CENTER);
         answerField.setBorder(BorderFactory.createLineBorder(NEON_GREEN, 2));
 
         gamePanel.add(questionLabel);
@@ -112,12 +114,10 @@ public class GameView extends JPanel {
         return b;
     }
 
-    // SCREEN CONTROL
     public void showMenu() { cardLayout.show(this, "MENU"); }
     public void showGame() { cardLayout.show(this, "GAME"); }
     public void showResult() { cardLayout.show(this, "RESULT"); }
 
-    // UI
     public void setQuestionText(String text) { questionLabel.setText(text); }
     public String getUserAnswer() { return answerField.getText(); }
     public void clearAnswer() { answerField.setText(""); }
@@ -132,10 +132,10 @@ public class GameView extends JPanel {
                 "<br>Total Wrong Answers: " + wrong + "</html>");
     }
 
-    // GETTERS
     public JButton getAdditionButton() { return additionButton; }
     public JButton getSubtractionButton() { return subtractionButton; }
     public JButton getMultiplicationButton() { return multiplicationButton; }
+    public JButton getDivisionButton() { return divisionButton; }
     public JTextField getAnswerField() { return answerField; }
     public JButton getNextButton() { return nextButton; }
     public JButton getHomeButton() { return homeButton; }

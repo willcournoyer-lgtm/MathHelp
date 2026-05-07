@@ -39,6 +39,14 @@ public class GameController {
             view.showGame();
         });
 
+        // ✅ DIVISION
+        view.getDivisionButton().addActionListener(e -> {
+            model.generateDivisionQuestion();
+            view.setQuestionText(model.getNum1() + " ÷ " + model.getNum2());
+            view.clearAnswer();
+            view.showGame();
+        });
+
         // ANSWER INPUT
         view.getAnswerField().addActionListener(e -> {
             try {
@@ -64,6 +72,7 @@ public class GameController {
         view.getNextButton().addActionListener(e -> {
 
             switch (model.getCurrentMode()) {
+
                 case "ADDITION":
                     model.generateAdditionQuestion();
                     view.setQuestionText(model.getNum1() + " + " + model.getNum2());
@@ -77,6 +86,11 @@ public class GameController {
                 case "MULTIPLICATION":
                     model.generateMultiplicationQuestion();
                     view.setQuestionText(model.getNum1() + " × " + model.getNum2());
+                    break;
+
+                case "DIVISION":
+                    model.generateDivisionQuestion();
+                    view.setQuestionText(model.getNum1() + " ÷ " + model.getNum2());
                     break;
             }
 

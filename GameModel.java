@@ -5,7 +5,7 @@ import java.util.Random;
 public class GameModel {
 
     // ========================
-    // GENERAL TRACKING DATA
+    // GENERAL DATA
     // ========================
     private int totalCorrect;
     private int correctInRow;
@@ -36,7 +36,6 @@ public class GameModel {
     public void generateAdditionQuestion() {
         num1 = random.nextInt(999) + 1;
         num2 = random.nextInt(999) + 1;
-
         correctAnswer = num1 + num2;
         currentMode = "ADDITION";
     }
@@ -64,15 +63,30 @@ public class GameModel {
     // MULTIPLICATION
     // ========================
     public void generateMultiplicationQuestion() {
-        num1 = random.nextInt(21); // 0–20
-        num2 = random.nextInt(21); // 0–20
-
+        num1 = random.nextInt(21);
+        num2 = random.nextInt(21);
         correctAnswer = num1 * num2;
         currentMode = "MULTIPLICATION";
     }
 
     // ========================
-    // ANSWER CHECK
+    // DIVISION
+    // ========================
+    public void generateDivisionQuestion() {
+        int base = random.nextInt(20) + 1;   // 1–20
+        int multiplier = random.nextInt(20) + 1; // 1–20
+
+        int product = base * multiplier;
+
+        num1 = product;     // numerator
+        num2 = multiplier;  // divisor
+
+        correctAnswer = base; // result of division
+        currentMode = "DIVISION";
+    }
+
+    // ========================
+    // CHECK ANSWER
     // ========================
     public boolean checkAnswer(int userAnswer) {
         selectedAnswers.add(userAnswer);
