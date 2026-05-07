@@ -15,37 +15,31 @@ public class GameController {
         frame.add(view);
         frame.setVisible(true);
 
-        // ========================
-        // ADDITION BUTTON
-        // ========================
+        // ADDITION
         view.getAdditionButton().addActionListener(e -> {
             model.generateAdditionQuestion();
-
-            view.setQuestionText(
-                model.getNum1() + " + " + model.getNum2()
-            );
-
+            view.setQuestionText(model.getNum1() + " + " + model.getNum2());
             view.clearAnswer();
             view.showGame();
         });
 
-        // ========================
-        // SUBTRACTION BUTTON
-        // ========================
+        // SUBTRACTION
         view.getSubtractionButton().addActionListener(e -> {
             model.generateSubtractionQuestion();
-
-            view.setQuestionText(
-                model.getNum1() + " - " + model.getNum2()
-            );
-
+            view.setQuestionText(model.getNum1() + " - " + model.getNum2());
             view.clearAnswer();
             view.showGame();
         });
 
-        // ========================
-        // ANSWER SUBMIT
-        // ========================
+        // MULTIPLICATION
+        view.getMultiplicationButton().addActionListener(e -> {
+            model.generateMultiplicationQuestion();
+            view.setQuestionText(model.getNum1() + " × " + model.getNum2());
+            view.clearAnswer();
+            view.showGame();
+        });
+
+        // ANSWER INPUT
         view.getAnswerField().addActionListener(e -> {
             try {
                 int answer = Integer.parseInt(view.getUserAnswer());
@@ -66,30 +60,31 @@ public class GameController {
             }
         });
 
-        // ========================
         // NEXT QUESTION
-        // ========================
         view.getNextButton().addActionListener(e -> {
 
-            if (model.getCurrentMode().equals("ADDITION")) {
-                model.generateAdditionQuestion();
-                view.setQuestionText(
-                    model.getNum1() + " + " + model.getNum2()
-                );
-            } else if (model.getCurrentMode().equals("SUBTRACTION")) {
-                model.generateSubtractionQuestion();
-                view.setQuestionText(
-                    model.getNum1() + " - " + model.getNum2()
-                );
+            switch (model.getCurrentMode()) {
+                case "ADDITION":
+                    model.generateAdditionQuestion();
+                    view.setQuestionText(model.getNum1() + " + " + model.getNum2());
+                    break;
+
+                case "SUBTRACTION":
+                    model.generateSubtractionQuestion();
+                    view.setQuestionText(model.getNum1() + " - " + model.getNum2());
+                    break;
+
+                case "MULTIPLICATION":
+                    model.generateMultiplicationQuestion();
+                    view.setQuestionText(model.getNum1() + " × " + model.getNum2());
+                    break;
             }
 
             view.clearAnswer();
             view.showGame();
         });
 
-        // ========================
-        // HOME BUTTON
-        // ========================
+        // HOME
         view.getHomeButton().addActionListener(e -> {
             view.showMenu();
         });

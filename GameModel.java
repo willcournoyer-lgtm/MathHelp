@@ -15,13 +15,11 @@ public class GameModel {
     private Random random;
 
     // ========================
-    // CURRENT QUESTION DATA
+    // CURRENT QUESTION
     // ========================
     private int num1;
     private int num2;
     private int correctAnswer;
-
-    // Track which mode we're in
     private String currentMode;
 
     public GameModel() {
@@ -33,7 +31,7 @@ public class GameModel {
     }
 
     // ========================
-    // ADDITION SECTION
+    // ADDITION
     // ========================
     public void generateAdditionQuestion() {
         num1 = random.nextInt(999) + 1;
@@ -44,13 +42,12 @@ public class GameModel {
     }
 
     // ========================
-    // SUBTRACTION SECTION
+    // SUBTRACTION
     // ========================
     public void generateSubtractionQuestion() {
         int a = random.nextInt(999) + 1;
         int b = random.nextInt(999) + 1;
 
-        // Ensure larger number is first
         if (a >= b) {
             num1 = a;
             num2 = b;
@@ -64,14 +61,25 @@ public class GameModel {
     }
 
     // ========================
-    // CHECK ANSWER
+    // MULTIPLICATION
+    // ========================
+    public void generateMultiplicationQuestion() {
+        num1 = random.nextInt(21); // 0–20
+        num2 = random.nextInt(21); // 0–20
+
+        correctAnswer = num1 * num2;
+        currentMode = "MULTIPLICATION";
+    }
+
+    // ========================
+    // ANSWER CHECK
     // ========================
     public boolean checkAnswer(int userAnswer) {
         selectedAnswers.add(userAnswer);
 
         if (userAnswer == correctAnswer) {
-            totalCorrect++;       // ✅ first
-            correctInRow++;       // ✅ second
+            totalCorrect++;     // ✅ FIRST
+            correctInRow++;     // ✅ SECOND
             return true;
         } else {
             totalWrong++;
@@ -83,27 +91,10 @@ public class GameModel {
     // ========================
     // GETTERS
     // ========================
-    public int getNum1() {
-        return num1;
-    }
-
-    public int getNum2() {
-        return num2;
-    }
-
-    public int getTotalCorrect() {
-        return totalCorrect;
-    }
-
-    public int getCorrectInRow() {
-        return correctInRow;
-    }
-
-    public int getTotalWrong() {
-        return totalWrong;
-    }
-
-    public String getCurrentMode() {
-        return currentMode;
-    }
+    public int getNum1() { return num1; }
+    public int getNum2() { return num2; }
+    public int getTotalCorrect() { return totalCorrect; }
+    public int getCorrectInRow() { return correctInRow; }
+    public int getTotalWrong() { return totalWrong; }
+    public String getCurrentMode() { return currentMode; }
 }
